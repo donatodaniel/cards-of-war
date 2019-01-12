@@ -1,34 +1,53 @@
+/*
+  Important = Player (who will play the game) | Opponnet  = the Machine(the logics created under the hood)
+*/ 
+
+
 $(document).ready(function () {
 
-  var audio = new Audio("audio/bgaudio.mp3");
-
+  let audio = new Audio("audio/bgaudio.mp3");
   audio.oncanplaythrough = function () {
     audio.play();
     audio.loop = true;
   }
 
+  // Add a class 'active' to the first card of the player so that he can use right and left arrow to select his cards
   $("#card1").addClass("active");
   $("#fist1").addClass("activeActive");
+
+  //Sets Opponnets and Players Life Points and Strength points on Dashboard
   newGame.totals();
-  $("#oppDash").html("<span><strong>PC<br/><img src='images/heart.png' title='oppLifePoints' width='18' height='15'> " + newGame.totals()[0] + " <img src='images/fist.png' title='oppLifePoints' width='20' height='15'> " + newGame.totals()[1] + "</strong></span>");
-  $("#playerDash").html("<span><strong>You<br/><img src='images/heart.png' title='oppLifePoints' width='18' height='15'> " + newGame.totals()[2] + " <img src='images/fist.png' title='oppLifePoints' width='20' height='15'> " + newGame.totals()[3] + "</strong></span>");
+  $("#oppDash").html("<span><strong>Machine<br/><img src='images/heart.png' title='oppLifePoints' width='18' height='15'> " + newGame.totals()[0] + " <img src='images/fist.png' title='oppLifePoints' width='20' height='15'> " + newGame.totals()[1] + "</strong></span>");
+  $("#playerDash").html("<span><strong>You<br/><img src='images/heart.png' title='playerPoints' width='18' height='15'> " + newGame.totals()[2] + " <img src='images/fist.png' title='oppLifePoints' width='20' height='15'> " + newGame.totals()[3] + "<br/><i>XP</i></strong> "+ newGame.playerExperience+"</span>");
+
+
 
 });
 
-// let background = new Audio('audio/bg.mp3');
-// background.play();
+/* There are being created variables to control which div the user is currently on whenever his moving to the right or left
+  amountCards = current card
+  amountPower = is how many strength was selected to be played
+  fightTime  = is used to count the second time button 'Enter' is pressed, so that it can set the battleField to appear on the screen
+*/
 let amountCards = 0;
 let amountPower = 1;
 let fightTime = 0;
 document.onkeydown = function (e) {
 
+  /*Here we have the control for the keys pressed by the user and change classes so that the elements appear of be heighlighted in the DOM
+  If its in Pickup card mode users moves right or left
+  If its in Select the Attach mode it increases the amountPower 
+  If pressed Esc user can decide not to continue with that card
+  */
+
   switch (e.keyCode) {
+    //Left Button
     case 37:
       if (newGame.strengthSelection == 0) {
         if (amountCards >= 1) {
           $("div[class~='active'").prev().addClass("active");
           $("div[class~='active'").next().removeClass("active");
-          var cardChange = new Audio('audio/cardChange.mp3');
+          let cardChange = new Audio('audio/cardChange.mp3');
           cardChange.play();
           amountCards--;
         }
@@ -37,24 +56,20 @@ document.onkeydown = function (e) {
         if (amountPower >= 2) {
           $("div[class~='fistActive'").last().removeClass("fistActive");
           $("#fist1").addClass("activeActive");
-          console.log('left' + amountPower);
-          var cardChange = new Audio('audio/cardChange.mp3');
+          let cardChange = new Audio('audio/cardChange.mp3');
           cardChange.play();
           amountPower--;
         }
         newGame.attackSetter(amountCards, amountPower);
-        console.log(amountPower);
       }
       break;
-    // Right button
+    // Right Button
     case 39:
       if (newGame.strengthSelection == 0) {
         if (amountCards <= 2) {
           $("div[class~='active'").next().addClass("active");
           $("div[class~='active'").prev().removeClass("active");
-          // currentCard = $("div[class~='active'")[0].id.split('')[4];
-          console.log(amountCards);
-          var cardChange = new Audio('audio/cardChange.mp3');
+          let cardChange = new Audio('audio/cardChange.mp3');
           cardChange.play();
           $("#card1").removeClass("active");
           amountCards++;
@@ -63,10 +78,9 @@ document.onkeydown = function (e) {
       if (newGame.strengthSelection == 1) {
         if (amountPower <= (newGame.strengthPlayer - 1)) {
           $("div[class~='fistActive'").next().addClass("fistActive");
-          console.log('right' + amountPower);
           amountPower++;
         }
-        var fireIncrease = new Audio('audio/fireIncrease.mp3');
+        let fireIncrease = new Audio('audio/fireIncrease.mp3');
         fireIncrease.play();
         newGame.attackSetter(amountCards, amountPower);
       }
@@ -80,7 +94,6 @@ document.onkeydown = function (e) {
         $("#attack").css("visibility", "hidden")
       }
       if (fightTime >= 1) {
-        console.log(amountPower);
         newGame.playerChoosesFirst(amountCards, amountPower);
         newGame.showAnimation();
         let prepare = new Audio('audio/prepareYourself.mp3');
@@ -92,7 +105,6 @@ document.onkeydown = function (e) {
         fightTime++;
         newGame.attackSetter(amountCards, amountPower);
       }
-      console.log(newGame.strengthSelection);
       break;
     case 27:
       if (newGame.strengthSelection == 1) {
@@ -106,20 +118,11 @@ document.onkeydown = function (e) {
       }
 
 
-      console.log(newGame.strengthSelection);
-      // $("#attack").css("visibility","visible").toggle();
       break;
-    // case 38:
-    //   $("div[class~='fistActive'").next().addClass("fistActive");
-    // break;
-    // case 40:
-    //  $("div[class~='fistActive'").last().removeClass("fistActive");
-    //  $("#fist1").addClass("activeActive");
-    // break;
 
   }
 }
-// Create a match constructor
+// Create a match constructor to start the Game with all variables needed for the game
 let Match = function (cards) {
   this.cards = cards;
   this.level = 0;
@@ -149,11 +152,9 @@ let Match = function (cards) {
 // Suffle the array of cards
 Match.prototype.shuflleCards = function () {
 
-  // Shuffles the deck array
   for (let i = this.cards.length - 1; i >= 0; i--) {
     let randomNum = Math.floor(Math.random() * (i + 1));
     let value = this.cards[randomNum];
-
     this.cards[randomNum] = this.cards[i];
     this.cards[i] = value;
   }
@@ -161,13 +162,11 @@ Match.prototype.shuflleCards = function () {
 
   // Decide who starts the first round if it's 1 so the Plater should start otherwhise the opponent starts
   this.whoStarts = Math.random() > 0.5 ? 1 : 0;
-  console.log(this.whoStarts);
 
 };
 
-// Choose  4 random cards for both the player and the Opponent
+// Choose  4 random cards for both the player and the Opponent and set them as background in the DOM Divs
 Match.prototype.pickCards = function () {
-  //take 4 first cards from the shuffled array for the player
   for (j = 0; j <= 3; j++) {
     this.pickedCardsPlayer.push(this.cards[j]);
     $("#card" + (j + 1)).css("background-image", "url('images/" + this.pickedCardsPlayer[j].img + "')");
@@ -176,11 +175,9 @@ Match.prototype.pickCards = function () {
     $("#card" + (j + 1)).css("background-size", "105% 105%");
     $("#card" + (j + 1)).css("background-position", "center");
     $("#card" + (j + 1)).attr("title", this.pickedCardsPlayer[j].description);
-    // $("#card"+(j+1)).html("Name: "+this.pickedCardsPlayer[j].name +"  <br/>Power: "+this.pickedCardsPlayer[j].power+" <br/>Damage: "+this.pickedCardsPlayer[j].damage);
-    console.log(this.pickedCardsPlayer[j].img);
+    this.cards[j].status = true;
   }
 
-  //take 4 consecutive cards from the shuffled array for the opponent
   for (k = 4; k <= 7; k++) {
     this.pickedCardsOpp.push(this.cards[k]);
     $("#opp" + k).css("background-image", "url('images/" + this.pickedCardsOpp[(k - 4)].img + "')");
@@ -189,10 +186,10 @@ Match.prototype.pickCards = function () {
     $("#opp" + k).css("background-size", "105% 105%");
     $("#opp" + k).css("background-position", "center");
     $("#opp" + k).attr("title", this.pickedCardsOpp[(k - 4)].description);
-    // $("#opp"+k).html("Name: "+this.pickedCardsOpp[(k-4)].name +"  <br/>Power: "+this.pickedCardsOpp[(k-4)].power+" <br/>Damage: "+this.pickedCardsOpp[(k-4)].damage);
+    this.cards[k].status = true;
   }
 };
-// card , attack
+// For each round the script chooses one out of the 4 card the Opponent has to battle, and also chooses how many strength capsules are going to be used against player
 Match.prototype.opponentStrategy = function () {
   let oppAttack = 0;
   let chooseCard = 0;
@@ -201,7 +198,6 @@ Match.prototype.opponentStrategy = function () {
     this.pickedCardsOpp[chooseCard].status = false;
     this.usedCardsOpp.push(this.pickedCardsOpp[chooseCard]);
     oppAttack = this.pickedCardsOpp[chooseCard].power * (this.strengthOpp <= 1 ? 1 : Math.floor(Math.random() * (this.strengthOpp)));
-    console.log(this.usedCardsOpp);
 
   } else if (this.round == 2) {
     this.round2 = this.pickedCardsOpp.filter(function (e) {
@@ -221,13 +217,11 @@ Match.prototype.opponentStrategy = function () {
     this.round3[chooseCard].status = false;
     this.usedCardsOpp.push(this.round3[chooseCard]);
     oppAttack = this.round3[chooseCard].power * (this.strengthOpp <= 1 ? 1 : Math.floor(Math.random() * (this.strengthOpp)));
-    
-  } else  {
+
+  } else {
     this.round4 = this.round3.filter(function (g) {
       return g.status == true;
     });
-    // chooseCard = 0;
-    console.log(this.round4[0]);
     chooseCard = this.round4.length;
     this.round4[0].status = false;
     this.usedCardsOpp.push(this.round4[0]);
@@ -238,7 +232,7 @@ Match.prototype.opponentStrategy = function () {
 }
 
 // Receive a card and see what is the card Power and multiplies the Power of the card by the strength chosen 
-// The strategy of the PC and the player strategy Card and attack for each one receives the index of the card the player wants to use
+// The strategy of the Opponent and the player strategy Card and attack for each one receives the index of the card the player wants to use
 Match.prototype.playerChoosesFirst = function (index, strength) {
 
   this.card = this.pickedCardsPlayer[index];
@@ -249,15 +243,12 @@ Match.prototype.playerChoosesFirst = function (index, strength) {
   setTimeout(function () {
     let newBattle = new Audio('audio/fight.mp3');
     newBattle.play();
-   
-    // audio.pause();
+
     let fightSound = new Audio('audio/FightSound.mp3');
     fightSound.play();
-    // $("#oppAttack").css("background-image","url('images/back.png')");
-    // $("#playerAttack").css("background-image","url('images/back.png')");
   }, 1750)
 
-  console.log(ind);
+  //Even though the player or opponnent run out of Strength points they always be granted with at least 1 Strength Point
   if (this.strengthPlayer < 1) {
     this.strengthPlayer = 1;
   } else {
@@ -270,73 +261,62 @@ Match.prototype.playerChoosesFirst = function (index, strength) {
   } else {
     this.strengthOpp -= (this.oppStrategy[1] / this.oppStrategy[0].power);
   }
-  console.log(this.oppStrategy[0]);
-  console.log("Opp Strength used: " + this.strengthOpp);
-  console.log("Opp Attack: " + oppAttack);
 
-  $("#battlefield").css("background-image","url(images/fightingArena"+this.round+".jpg)");
-  $("#oppTitle").html("<strong>" + oppAttack + "</strong><br><img src='images/fist.png' title='oppLifePoints' width='35' height='30'> " + this.oppStrategy[0].power + " X " + (oppAttack / this.oppStrategy[0].power));
-
+  //Show the battlefield and the current cards to be dueling in the field
+  $("#battlefield").css("background-image", "url(images/fightingArena" + this.round + ".jpg)");
+  $("#oppTitle").html("<strong>Machine<br/>" + oppAttack + "</strong><br><img src='images/fist.png' title='oppLifePoints' width='35' height='30'> " + this.oppStrategy[0].power + " X " + (oppAttack / this.oppStrategy[0].power));
   $("#oppAttack").css("background-image", "url('images/" + this.pickedCardsOpp[ind].img + "')");
   $("#playerAttack").css("background-image", "url('images/" + this.pickedCardsPlayer[index].img + "')");
-
   $("#oppAttack").css("background-repeat", "no-repeat");
   $("#oppAttack").css("background-size", "cover");
   $("#oppAttack").css("background-size", "105% 105%");
   $("#oppAttack").css("background-position", "center");
-  $("#playerTitle").html("<strong>" + this.attack + "</strong><br><img src='images/fist.png' title='oppLifePoints' width='35' height='30'> " + this.card.power + " X " + (this.attack / this.card.power));
-
+  $("#playerTitle").html("<strong>You<br/>" + this.attack + "</strong><br><img src='images/fist.png' title='oppLifePoints' width='35' height='30'> " + this.card.power + " X " + (this.attack / this.card.power));
   $("#playerAttack").css("background-repeat", "no-repeat");
   $("#playerAttack").css("background-size", "cover");
   $("#playerAttack").css("background-size", "105% 105%");
   $("#playerAttack").css("background-position", "center");
 
 
+  //At this moment we compare who wins the current round based on who has the bigger attack and zeros the Player attack for next round
   if (this.attack > oppAttack) {
     this.lifePointsOpp -= this.card.damage;
-    // $('#battlefield').html("Opp Attack: "+oppAttack+" vs Player Attack: "+this.attack+"<br> You won the round");
-    this.attack = 0;
-
-    // $('#opp'+chooseCard).addClass('attackCells');
-    // $('#card'+chooseCard).addClass('attackCells');
+    this.playerExperience += (this.attack - oppAttack);
     $("#oppAttack").addClass("defeated");
     $('#opp' + (ind + 4)).html("<img src='images/x.png' width=150 height=70>");
     $('#opp' + (ind + 4)).addClass("defeated");
     $('#card' + (index + 1)).html("<img src='images/winner.png' width=110 height=90>");
-    setTimeout(function(){
-    newResult = new Audio('audio/youwin.mp3');
-    newResult.play();
-    },6500);
-    // return "Player";
+    
+    setTimeout(function () {
+      newResult = new Audio('audio/youwin.mp3');
+      newResult.play();
+    }, 6500);
+    this.attack = 0;
+
   } else if (this.attack == oppAttack) {
 
     this.attack = 0;
-    // return "Draw";
   } else {
     this.lifePointsPlayer -= this.oppStrategy[0].damage;
-    // $('#battlefield').html("Opp Attack: "+oppAttack+" vs Player Attack: "+this.attack+"<br>  PC won the round");
     this.attack = 0;
     this.oppStrategy[0].status = false;
     $('#card' + (index + 1)).html("<img src='images/x.png' width=150 height=70>");
     $('#card' + (index + 1)).addClass("defeated");
     $('#opp' + (ind + 4)).html("<img src='images/winner.png' width=110 height=90>");
-
     $("#playerAttack").addClass("defeated");
-    setTimeout(function(){
+    setTimeout(function () {
       newResult = new Audio('audio/youlose.mp3');
-    newResult.play();
-    },6500);
-    
-    // return "Opponent";       
+      newResult.play();
+    }, 6500);
+
   }
 
+  //Show the effect that seems lightbeams are being triggered between dueling cards
   setTimeout(function () {
     $('#battlefield').css('visibility', 'visible');
     $('canvas').css('visibility', 'visible');
-    var audio = new Audio('audio/obliterate.wav');
+    let audio = new Audio('audio/attack.mp3');
     audio.play();
-    // var effect = new Plugin();
-    // effect.Plugin();
 
     setTimeout(function () {
       $('#battlefield').css('visibility', 'hidden');
@@ -346,6 +326,7 @@ Match.prototype.playerChoosesFirst = function (index, strength) {
     }, 9000);
   }, 1200);
 
+  //Update the round Dashboards
   this.updateRound();
   this.updateDash();
 
@@ -358,8 +339,6 @@ Match.prototype.updateRound = function () {
   } else {
     this.round++;
 
-    // $('.attackCells').first().nextAll().removeClass('attackCells');
-    console.log(this.round);
   }
 }
 
@@ -369,15 +348,10 @@ Match.prototype.updateLoserCard = function (index) {
 
 
 Match.prototype.updateDash = function () {
-  $("#oppDash").html("<span><strong>PC<br/><img src='images/heart.png' title='oppLifePoints' width='18' height='15'> " + this.lifePointsOpp + "<img src='images/fist.png' title='oppLifePoints' width='20' height='15'> " + this.strengthOpp + "</strong></span>");
-  $("#playerDash").html("<span><strong>You<br/><img src='images/heart.png' title='oppLifePoints' width='18' height='15'> " + this.lifePointsPlayer + "<img src='images/fist.png' title='oppLifePoints' width='20' height='15'> " + this.strengthPlayer + "</strong></span>");
+  $("#oppDash").html("<span><strong>Machine<br/><img src='images/heart.png' title='oppLifePoints' width='18' height='15'> " + this.lifePointsOpp + "<img src='images/fist.png' title='oppLifePoints' width='20' height='15'> " + this.strengthOpp + "</strong></span><br/>");
+  $("#playerDash").html("<span><strong>You<br/><img src='images/heart.png' title='oppLifePoints' width='18' height='15'> " + this.lifePointsPlayer + "<img src='images/fist.png' title='oppLifePoints' width='20' height='15'> " + this.strengthPlayer + "<br/>XP</strong> "+ this.playerExperience+"</span>");
 }
 
-//Show the player the layout if Opponet card already defined
-// Match.prototype.opponentChoosesFirst = function(){
-//   let oppAttack = this.opponentStrategy()[1];
-
-// };
 Match.prototype.totals = function () {
   return [this.lifePointsOpp, this.strengthOpp, this.lifePointsPlayer, this.strengthPlayer];
 };
@@ -389,21 +363,20 @@ Match.prototype.showAnimation = function () {
 };
 
 Match.prototype.endOfMatch = function () {
-  console.log(this.lifePointsOpp);
-  console.log(this.lifePointsPlayer);
   let newResult;
   let winner = '';
   if (this.lifePointsPlayer > this.lifePointsOpp) {
-    winner = 'Player is the winner';
-    newResult = new Audio('audio/youwin.mp3');
+    winner = 'You win! You\'ve increased your XP points to ' + this.playerExperience + '!';
   } else if (this.lifePointsPlayer < this.lifePointsOpp) {
-    winner = 'Opponent is the winner';
-    newResult = new Audio('audio/youlose.mp3');
+    winner = 'Game Over! The Machine is the winner';
+    this.playerExperience = 0;
   } else {
     winner = 'It\'s a draw';
 
   }
   setTimeout(function () {
+
+    newResult = new Audio('audio/matchEnd.mp3');
     newResult.play();
     alert(winner);
   }, 5500);
@@ -474,7 +447,6 @@ Match.prototype.createMatch = function () {
   }
 
 }
-
 
 let newGame = new Match(deck);
 
