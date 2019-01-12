@@ -1,0 +1,7 @@
+Joga da velha ==> https://codepen.io/ninabondar/pen/EGjbeq?page=1&
+card flip ==> https://codepen.io/shayhowe/pen/Fvjnf
+
+
+https://asana.com/developers/api-reference/projects#
+
+existemovimentaçãodedepartamentooutime
