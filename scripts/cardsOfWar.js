@@ -1,42 +1,42 @@
 // Create all cards of the game
 let deck = [
-  { name: 'CHAMAELEON', description: 'THE CHAMELEON', power: 3, damage: 2, element: 'EARTH', img: 'CHAMAELEON.png', status: true },
-  { name: 'PARDALIS', description: 'THE GIRAFFE', power: 4, damage: 2, element: 'EARTH', img: 'PARDALIS.png', status: true },
-  { name: 'CORVUS', description: 'THE RAVEN', power: 8, damage: 5, element: 'WIND', img: 'CORVUS.png', status: true },
-  { name: 'VULPECULA', description: 'THE LITTLE FOX', power: 2, damage: 4, element: 'EARTH', img: 'VULPECULA.png', status: true },
-  { name: 'LACERTA', description: 'THE LIZARD', power: 5, damage: 2, element: 'EARTH', img: 'LACERTA.png', status: true },
-  { name: 'CETUS', description: 'THE WHALE', power: 5, damage: 2, element: 'WATER', img: 'CETUS.png', status: true },
-  { name: 'INDUS', description: 'THE INDIAN', power: 5, damage: 3, element: 'EARTH', img: 'INDUS.png', status: true },
-  { name: 'VOLANS', description: 'THE FLYING FISH', power: 7, damage: 2, element: 'WATER', img: 'VOLANS.png', status: true },
-  { name: 'PAVO', description: 'THE PEACOCK', power: 7, damage: 2, element: 'EARTH', img: 'PAVO.png', status: true },
-  { name: 'OCTANS', description: 'THE OCTANT', power: 5, damage: 4, element: 'WATER', img: 'OCTANS.png', status: true },
-  { name: 'OPHIUCHUS', description: 'THE SERPENT HOLDER', power: 5, damage: 4, element: 'EARTH', img: 'OPHIUCHUS.png', status: true },
-  { name: 'DORADO', description: 'THE DOLPHINFISH', power: 5, damage: 4, element: 'WATER', img: 'DORADO.png', status: true },
-  { name: 'MUSCA', description: 'THE FLY', power: 4, damage: 5, element: 'WIND', img: 'MUSCA.png', status: true },
-  { name: 'CANES VENATICI', description: 'THE HUNTING DOGS', power: 8, damage: 2, element: 'EARTH', img: 'CANES VENATICI.png', status: true },
-  { name: 'APUS', description: 'THE BIRD OF PARADISE', power: 7, damage: 3, element: 'WIND', img: 'APUS.png', status: true },
-  { name: 'CYGNUS', description: 'THE SWAN', power: 7, damage: 3, element: 'WATER', img: 'CYGNUS.png', status: true },
-  { name: 'EQUULEUS', description: 'THE LITTLE HORSE', power: 7, damage: 4, element: 'EARTH', img: 'EQUULEUS.png', status: true },
-  { name: 'SAGITTARIUS', description: 'THE ARCHER', power: 6, damage: 3, element: 'EARTH', img: 'SAGITTARIUS.png', status: true },
-  { name: 'ORION', description: 'THE HUNTER', power: 6, damage: 5, element: 'EARTH', img: 'ORION.png', status: true },
-  { name: 'DRACO', description: 'THE DRAGON', power: 6, damage: 5, element: 'FIRE', img: 'DRACO.png', status: true },
-  { name: 'CEPHEUS', description: 'THE KING', power: 10, damage: 2, element: 'EARTH', img: 'CEPHEUS.png', status: true },
-  { name: 'MONOCEROS', description: 'THE UNICORN', power: 9, damage: 3, element: 'EARTH', img: 'MONOCEROS.png', status: true },
-  { name: 'PEGASUS', description: 'THE WINGED HORSE', power: 9, damage: 3, element: 'WIND', img: 'PEGASUS.png', status: true },
-  { name: 'LYRA', description: 'THE HARP', power: 9, damage: 3, element: 'EARTH', img: 'LYRA.png', status: true },
-  { name: 'PERSEUS', description: 'THE GREEK HERO', power: 8, damage: 4, element: 'WIND', img: 'PERSEUS.png', status: true },
-  { name: 'LUPUS', description: 'THE WOLF', power: 8, damage: 4, element: 'EARTH', img: 'LUPUS.png', status: true },
-  { name: 'LEO', description: 'THE LION', power: 7, damage: 5, element: 'EARTH', img: 'LEO.png', status: true },
-  { name: 'AQUILA', description: 'THE EAGLE', power: 9, damage: 4, element: 'WIND', img: 'AQUILA.png', status: true },
-  { name: 'TAURUS', description: 'THE BULL', power: 9, damage: 4, element: 'EARTH', img: 'TAURUS.png', status: true },
-  { name: 'SCORPIUS', description: 'THE SCORPION', power: 8, damage: 5, element: 'EARTH', img: 'SCORPIUS.png', status: true },
-  { name: 'HYDRA', description: 'THE WATER SERPENT', power: 8, damage: 5, element: 'WATER', img: 'HYDRA.png', status: true },
-  { name: 'PHOENIX', description: 'THE FIREBIRD', power: 9, damage: 5, element: 'FIRE', img: 'PHOENIX.png', status: true },
-  { name: 'COLUMBA', description: 'THE DOVE', power: 9, damage: 5, element: 'WIND', img: 'COLUMBA.png', status: true },
-  { name: 'AQUARIUS', description: 'THE WATER BEARER', power: 9, damage: 5, element: 'WATER', img: 'AQUARIUS.png', status: true },
-  { name: 'CENTAURUS', description: 'THE CENTAUR', power: 10, damage: 5, element: 'EARTH', img: 'CENTAURUS.png', status: true },
-  { name: 'HERCULES', description: 'THE STRONG MAN', power: 9, damage: 5, element: 'EARTH', img: 'HERCULES.png', status: true },
-  { name: 'ZEUS', description: 'THE THUNDER GOD', power: 10, damage: 5, element: 'WIND', img: 'ZEUS.png', status: true }
+  { name: 'CHAMAELEON', description: 'THE CHAMELEON', power: 3, damage: 2, element: 'EARTH', img: 'CHAMAELEON.PNG', status: true },
+  { name: 'PARDALIS', description: 'THE GIRAFFE', power: 4, damage: 2, element: 'EARTH', img: 'PARDALIS.PNG', status: true },
+  { name: 'CORVUS', description: 'THE RAVEN', power: 8, damage: 5, element: 'WIND', img: 'CORVUS.PNG', status: true },
+  { name: 'VULPECULA', description: 'THE LITTLE FOX', power: 2, damage: 4, element: 'EARTH', img: 'VULPECULA.PNG', status: true },
+  { name: 'LACERTA', description: 'THE LIZARD', power: 5, damage: 2, element: 'EARTH', img: 'LACERTA.PNG', status: true },
+  { name: 'CETUS', description: 'THE WHALE', power: 5, damage: 2, element: 'WATER', img: 'CETUS.PNG', status: true },
+  { name: 'INDUS', description: 'THE INDIAN', power: 5, damage: 3, element: 'EARTH', img: 'INDUS.PNG', status: true },
+  { name: 'VOLANS', description: 'THE FLYING FISH', power: 7, damage: 2, element: 'WATER', img: 'VOLANS.PNG', status: true },
+  { name: 'PAVO', description: 'THE PEACOCK', power: 7, damage: 2, element: 'EARTH', img: 'PAVO.PNG', status: true },
+  { name: 'OCTANS', description: 'THE OCTANT', power: 5, damage: 4, element: 'WATER', img: 'OCTANS.PNG', status: true },
+  { name: 'OPHIUCHUS', description: 'THE SERPENT HOLDER', power: 5, damage: 4, element: 'EARTH', img: 'OPHIUCHUS.PNG', status: true },
+  { name: 'DORADO', description: 'THE DOLPHINFISH', power: 5, damage: 4, element: 'WATER', img: 'DORADO.PNG', status: true },
+  { name: 'MUSCA', description: 'THE FLY', power: 4, damage: 5, element: 'WIND', img: 'MUSCA.PNG', status: true },
+  { name: 'CANES VENATICI', description: 'THE HUNTING DOGS', power: 8, damage: 2, element: 'EARTH', img: 'CANES VENATICI.PNG', status: true },
+  { name: 'APUS', description: 'THE BIRD OF PARADISE', power: 7, damage: 3, element: 'WIND', img: 'APUS.PNG', status: true },
+  { name: 'CYGNUS', description: 'THE SWAN', power: 7, damage: 3, element: 'WATER', img: 'CYGNUS.PNG', status: true },
+  { name: 'EQUULEUS', description: 'THE LITTLE HORSE', power: 7, damage: 4, element: 'EARTH', img: 'EQUULEUS.PNG', status: true },
+  { name: 'SAGITTARIUS', description: 'THE ARCHER', power: 6, damage: 3, element: 'EARTH', img: 'SAGITTARIUS.PNG', status: true },
+  { name: 'ORION', description: 'THE HUNTER', power: 6, damage: 5, element: 'EARTH', img: 'ORION.PNG', status: true },
+  { name: 'DRACO', description: 'THE DRAGON', power: 6, damage: 5, element: 'FIRE', img: 'DRACO.PNG', status: true },
+  { name: 'CEPHEUS', description: 'THE KING', power: 10, damage: 2, element: 'EARTH', img: 'CEPHEUS.PNG', status: true },
+  { name: 'MONOCEROS', description: 'THE UNICORN', power: 9, damage: 3, element: 'EARTH', img: 'MONOCEROS.PNG', status: true },
+  { name: 'PEGASUS', description: 'THE WINGED HORSE', power: 9, damage: 3, element: 'WIND', img: 'PEGASUS.PNG', status: true },
+  { name: 'LYRA', description: 'THE HARP', power: 9, damage: 3, element: 'EARTH', img: 'LYRA.PNG', status: true },
+  { name: 'PERSEUS', description: 'THE GREEK HERO', power: 8, damage: 4, element: 'WIND', img: 'PERSEUS.PNG', status: true },
+  { name: 'LUPUS', description: 'THE WOLF', power: 8, damage: 4, element: 'EARTH', img: 'LUPUS.PNG', status: true },
+  { name: 'LEO', description: 'THE LION', power: 7, damage: 5, element: 'EARTH', img: 'LEO.PNG', status: true },
+  { name: 'AQUILA', description: 'THE EAGLE', power: 9, damage: 4, element: 'WIND', img: 'AQUILA.PNG', status: true },
+  { name: 'TAURUS', description: 'THE BULL', power: 9, damage: 4, element: 'EARTH', img: 'TAURUS.PNG', status: true },
+  { name: 'SCORPIUS', description: 'THE SCORPION', power: 8, damage: 5, element: 'EARTH', img: 'SCORPIUS.PNG', status: true },
+  { name: 'HYDRA', description: 'THE WATER SERPENT', power: 8, damage: 5, element: 'WATER', img: 'HYDRA.PNG', status: true },
+  { name: 'PHOENIX', description: 'THE FIREBIRD', power: 9, damage: 5, element: 'FIRE', img: 'PHOENIX.PNG', status: true },
+  { name: 'COLUMBA', description: 'THE DOVE', power: 9, damage: 5, element: 'WIND', img: 'COLUMBA.PNG', status: true },
+  { name: 'AQUARIUS', description: 'THE WATER BEARER', power: 9, damage: 5, element: 'WATER', img: 'AQUARIUS.PNG', status: true },
+  { name: 'CENTAURUS', description: 'THE CENTAUR', power: 10, damage: 5, element: 'EARTH', img: 'CENTAURUS.PNG', status: true },
+  { name: 'HERCULES', description: 'THE STRONG MAN', power: 9, damage: 5, element: 'EARTH', img: 'HERCULES.PNG', status: true },
+  { name: 'ZEUS', description: 'THE THUNDER GOD', power: 10, damage: 5, element: 'WIND', img: 'ZEUS.PNG', status: true }
 ];
 
 // Create the levels of the game
@@ -229,20 +229,3 @@ if (!window.cancelAnimationFrame)
     clearTimeout(id);
   };
 
-
-//rotating
-//   var imgWrapper = $("#img-wrapper"),
-//   images = $(".rotating-img"),
-//   tl = new TimelineMax({repeat:1});
-
-// TweenLite.set(imgWrapper, {perspective:500});
-// TweenLite.set(images, {rotationY:180});
-// TweenLite.set(images[0], {rotationY:0});
-
-// for(var i = 0; i < images.length; i++)
-// {
-// var nextImage = (i+1) == images.length ? images[0] : images[i+1];
-// tl
-//   .to(images[i], 2, {rotationY:'-180_ccw'}, (2 * i))
-//   .to(nextImage, 2, {rotationY:'0_ccw'}, (2 * i));
-// }
